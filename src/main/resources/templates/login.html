@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Login</title>
+	<link rel="stylesheet"  href="/css/auth.css">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="lowin">
+		<div class="lowin-brand">
+			<img src="/imgs/kodinger.jpg" alt="logo">
+		</div>
+		<div class="lowin-wrapper">
+			<div class="lowin-box lowin-login">
+				<div class="lowin-box-inner">
+
+					<p>Sign in to continue</p>
+					<div class="lowin-group">
+						<label>账号 <a href="javascript:;" class="login-back-link">Sign in?</a></label>
+						<input placeholder="请输入您的账号" type="text" name="loginId" class="lowin-input" id="loginId">
+					</div>
+					<div class="lowin-group password-group">
+						<label>密码 <a href="javascript:;" class="forgot-link">Forgot Password?</a></label>
+						<input placeholder="请输入您的密码" type="password" name="loginPassword" class="lowin-input"
+							id="loginPassword">
+					</div>
+					<button class="lowin-btn login-btn" id="login">
+						Sign In
+					</button>
+
+					<div class="text-foot">
+						Don't have an account? <a href="javascript:;" class="register-link">Register</a>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="lowin-box lowin-register">
+				<div class="lowin-box-inner">
+
+					<p>Let's create your account</p>
+					<div class="lowin-group">
+						<label>昵称</label>
+						<input placeholder="请输入您的个性昵称" type="text" name="name" autocomplete="name" class="lowin-input"
+							id="name">
+					</div>
+					<div class="lowin-group">
+						<label>账号</label>
+						<input placeholder="请输入您的账号" type="email" autocomplete="email" name="email" class="lowin-input"
+							id="registerId">
+					</div>
+					<div class="lowin-group">
+						<label>密码</label>
+						<input placeholder="请输入您的密码" type="password" name="password" autocomplete="current-password"
+							class="lowin-input" id="registerPassword">
+					</div>
+					<div class="lowin-group">
+						<label>再次输入密码</label>
+						<input placeholder="请再次输入您的密码" type="password" name="password" autocomplete="current-password"
+							class="lowin-input" id="registerPasswordConfirm">
+					</div>
+					<button class="lowin-btn" id="register">
+						Sign Up
+					</button>
+
+					<div class="text-foot">
+						Already have an account? <a href="javascript:;" class="login-link">Login</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/auth.js"></script>
+	<script>
+		Auth.init({
+			login_url: '#login',
+			forgot_url: '#forgot'
+		});
+		$(function () {
+			$("#login").click(function () {
+				console.log("userId:", $("#loginId").val())
+				console.log("password:", $("#loginPassword").val())
+				$.ajax({
+					type: "POST",
+					url: "/login/verify",
+					contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+					data: {
+						userId: $("#loginId").val(),
+						password: $("#loginPassword").val()
+					},
+					dataType: "json",
+					success: function (data) {
+						console.log(data);
+					},
+					error: function (e) {
+						console.log(e);
+					}
+				});
+			});
+
+			$("#register").click(function () {
+				console.log("name:", $("#name").val())
+				console.log("registerId:", $("#registerId").val())
+				console.log("registerPassword:", $("#registerPassword").val())
+				console.log("registerPasswordConfirm:", $("#registerPasswordConfirm").val())
+
+				var password = $("#registerPassword").val();
+				var passwordConfirm = $("#registerPasswordConfirm").val();
+
+				if (password === passwordConfirm) {
+					$.ajax({
+						type: "POST",
+						url: "/register/information",
+						contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+						data: {
+							userId: $("#registerId").val(),
+							password: $("#registerPassword").val(),
+							username:$("#name").val()
+						},
+						dataType: "json",
+						success: function (data) {
+							if( data ) {
+								alert("登陆成功！");
+							} else {
+								alert("注册失败！");
+							}
+						},
+						error: function (e) {
+							console.log(e);
+						}
+					});
+				} else {
+					alert("两次密码不一致，请重新输入！");
+					$("#name").val("")
+					$("#registerId").val("")
+					$("#registerPassword").val("")
+					$("#registerPasswordConfirm").val("")
+				}
+
+			});
+		});
+	</script>
+
+</body>
+
+</html>
