@@ -1,21 +1,11 @@
 package com.scu.hub.mapper;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -25,7 +15,27 @@ public class DepositoryMapperTest {
     DepositoryMapper depositoryMapper;
 
     @Test
-    public void getDepositoryById(){
+    public void getDepositoryById() {
         System.out.println(depositoryMapper.getDepositoryById(4));
+    }
+
+    @Test
+    public void insertDepository() {
+        System.out.println(depositoryMapper.insertDepository(400, "name", true, 3, "tagggggg"));
+    }
+
+    @Test
+    public void getMaxId() {
+        System.out.println(depositoryMapper.getMaxId());
+    }
+
+    @Test
+    public void setVisibleById() {
+        System.out.println(depositoryMapper.setVisibleById(1, 1));
+    }
+
+    @Test
+    public void keywordMatching() {
+        System.out.println(depositoryMapper.keywordMatching("de"));
     }
 }

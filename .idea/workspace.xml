@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22cb1f4e-8dc6-4756-9820-390e6260e808" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/DepositoryMapperTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scuNoteHub.log" beforeDir="false" afterPath="$PROJECT_DIR$/scuNoteHub.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/DepositoryMapperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/DepositoryMapperTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,8 +24,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/mapper/DepositoryMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="11" column="39" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="39" />
+            <state relative-caret-position="540">
+              <caret line="35" column="43" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/DepositoryMapperTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="653">
+              <caret line="32" column="30" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#961#962#0" expanded="true" />
+                <element signature="e#1034#1035#0" expanded="true" />
+                <element signature="e#1334#1335#0" expanded="true" />
+                <element signature="e#1407#1408#0" expanded="true" />
+                <element signature="e#1454#1455#0" expanded="true" />
+                <element signature="e#1528#1529#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/mapper/UserDepositoryMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="15" column="51" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,26 +64,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/DepositoryMapperTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/UserDepositoryMapperTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+            <state relative-caret-position="788">
+              <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#960#961#0" expanded="true" />
-                <element signature="e#1034#1035#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/controller/DepositoryControllerTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="24" selection-start-line="21" selection-end-line="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#463#464#0" expanded="true" />
+                <element signature="e#551#552#0" expanded="true" />
+                <element signature="e#606#607#0" expanded="true" />
+                <element signature="e#642#643#0" expanded="true" />
+                <element signature="e#903#904#0" expanded="true" />
+                <element signature="e#939#940#0" expanded="true" />
+                <element signature="e#1036#1037#0" expanded="true" />
+                <element signature="e#1072#1073#0" expanded="true" />
+                <element signature="e#1164#1165#0" expanded="true" />
+                <element signature="e#1185#1186#0" expanded="true" />
+                <element signature="e#1301#1302#0" expanded="true" />
+                <element signature="e#1337#1338#0" expanded="true" />
+                <element signature="e#1450#1451#0" expanded="true" />
+                <element signature="e#1535#1536#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,6 +152,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/scu/hub/controller/LogInOrRegisterController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/scu/hub/entity/User.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/DepositoryMapperTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/UserDepositoryMapperTest.java" />
       </list>
     </option>
   </component>
@@ -250,6 +280,15 @@
               <item name="hub" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ScuNoteHub" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ScuNoteHub" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hub" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -266,7 +305,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558908236337" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558909726102" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static" />
@@ -300,7 +339,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.DepositoryMapperTest.getDepositoryById">
+  <component name="RunManager" selected="JUnit.DepositoryMapperTest.insertDepository">
     <configuration name="DepositoryMapperTest.getDepositoryById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ScuNoteHub" />
       <extension name="coverage">
@@ -317,17 +356,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserControllerTest.getAllUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DepositoryMapperTest.insertDepository" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ScuNoteHub" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.scu.hub.controller.*" />
+          <option name="PATTERN" value="com.scu.hub.mapper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.scu.hub.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.scu.hub.controller.UserControllerTest" />
-      <option name="METHOD_NAME" value="getAllUser" />
+      <option name="PACKAGE_NAME" value="com.scu.hub.mapper" />
+      <option name="MAIN_CLASS_NAME" value="com.scu.hub.mapper.DepositoryMapperTest" />
+      <option name="METHOD_NAME" value="insertDepository" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -390,11 +429,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DepositoryMapperTest.insertDepository" />
         <item itemvalue="JUnit.DepositoryMapperTest.getDepositoryById" />
         <item itemvalue="JUnit.UserControllerTest.updateUserName" />
         <item itemvalue="JUnit.UserControllerTest.getUserByName" />
         <item itemvalue="JUnit.UserControllerTest.getUserById" />
-        <item itemvalue="JUnit.UserControllerTest.getAllUser" />
       </list>
     </recent_temporary>
   </component>
@@ -412,14 +451,11 @@
       <workItem from="1558850671087" duration="33753000" />
       <workItem from="1558885591803" duration="8845000" />
       <workItem from="1558898678686" duration="246000" />
-      <workItem from="1558898947379" duration="7094000" />
+      <workItem from="1558898947379" duration="8582000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UserControllerTest_getUserById - 2019.05.27 at 03h 49m 29s.xml">
-      <configuration name="UserControllerTest.getUserById" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="UserControllerTest_getUserById - 2019.05.27 at 04h 07m 06s.xml">
       <configuration name="UserControllerTest.getUserById" configurationId="JUnit" />
     </history-entry>
@@ -447,9 +483,12 @@
     <history-entry file="DepositoryMapperTest_getDepositoryById - 2019.05.27 at 06h 03m 46s.xml">
       <configuration name="DepositoryMapperTest.getDepositoryById" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="DepositoryMapperTest_insertDepository - 2019.05.27 at 06h 08m 40s.xml">
+      <configuration name="DepositoryMapperTest.insertDepository" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59990000" />
+    <option name="totallyTimeSpent" value="61478000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -464,7 +503,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49859944" visible="true" weight="0.2217484" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49859944" visible="true" weight="0.2217484" />
       <window_info id="Structure" order="1" sideWeight="0.5014006" side_tool="true" weight="0.2147651" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -474,7 +513,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.27765727" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.27765727" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39915967" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -499,6 +538,42 @@
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Bean Validation" order="9" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49859944" visible="true" weight="0.2217484" />
+      <window_info id="Structure" order="1" sideWeight="0.5014006" side_tool="true" weight="0.2147651" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.27765727" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39915967" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32913166" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286334" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067115" side_tool="true" weight="0.29691878" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32352942" />
+      <window_info anchor="bottom" id="Problems" order="12" weight="0.16386555" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -586,13 +661,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/service/Impl/TestServiceImpl.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/service/TestService.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/mapper/UserDepositoryMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/spring/boot/mybatis-spring-boot-autoconfigure/2.0.1/mybatis-spring-boot-autoconfigure-2.0.1.jar!/org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
@@ -713,20 +781,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/controller/DepositoryControllerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/mapper/DepositoryMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="24" selection-start-line="21" selection-end-line="24" />
+        <state relative-caret-position="540">
+          <caret line="35" column="43" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/mapper/DepositoryMapper.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/controller/DepositoryControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="39" />
+        <state relative-caret-position="135">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -735,12 +803,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/DepositoryMapperTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+        <state relative-caret-position="653">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#960#961#0" expanded="true" />
+            <element signature="e#961#962#0" expanded="true" />
             <element signature="e#1034#1035#0" expanded="true" />
+            <element signature="e#1334#1335#0" expanded="true" />
+            <element signature="e#1407#1408#0" expanded="true" />
+            <element signature="e#1454#1455#0" expanded="true" />
+            <element signature="e#1528#1529#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/scu/hub/mapper/UserDepositoryMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="15" column="51" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/scu/hub/mapper/UserDepositoryMapperTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="788">
+          <caret line="58" column="5" lean-forward="true" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#463#464#0" expanded="true" />
+            <element signature="e#551#552#0" expanded="true" />
+            <element signature="e#606#607#0" expanded="true" />
+            <element signature="e#642#643#0" expanded="true" />
+            <element signature="e#903#904#0" expanded="true" />
+            <element signature="e#939#940#0" expanded="true" />
+            <element signature="e#1036#1037#0" expanded="true" />
+            <element signature="e#1072#1073#0" expanded="true" />
+            <element signature="e#1164#1165#0" expanded="true" />
+            <element signature="e#1185#1186#0" expanded="true" />
+            <element signature="e#1301#1302#0" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1450#1451#0" expanded="true" />
+            <element signature="e#1535#1536#0" expanded="true" />
           </folding>
         </state>
       </provider>
