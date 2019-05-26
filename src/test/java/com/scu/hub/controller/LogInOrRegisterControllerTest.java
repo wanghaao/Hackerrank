@@ -15,12 +15,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-public class UserControllerTest {
+public class LogInOrRegisterControllerTest {
 
-    private static final String url = "/user";
+    private static final String url = "/";
     @Autowired
     WebApplicationContext context;
     MockMvc mockMvc;
@@ -31,40 +30,36 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getAllUser() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(post(url+"/allUser")).andReturn();
+    public void loginPage() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(post(url+"/login/page")).andReturn();
         String content = mvcResult.getResponse().getContentAsString();
         System.out.println(content);
     }
 
     @Test
-    public void getUserById() throws Exception {
-        String userId = "user1";
-        MvcResult mvcResult = mockMvc.perform(post(url + "/getUserById").param("userId", userId))
-                .andReturn();
-        String content = mvcResult.getResponse().getContentAsString();
-        System.out.println(content);
-    }
+    public void register() throws Exception {
+        String userId = "userfdsaf1";
+        String username = "userjjname";
+        String password = "123456";
 
-    @Test
-    public void getUserByName() throws Exception {
-        String username = "2";
-        MvcResult mvcResult = mockMvc.perform(post(url + "/getUserByName").param("username", username))
-                .andReturn();
-        String content = mvcResult.getResponse().getContentAsString();
-        System.out.println(content);
-    }
-
-    @Test
-    public void updateUserName() throws Exception {
-        String username = "user1_new_name";
-        String userId = "user1";
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("username", username);
         params.add("userId", userId);
-        MvcResult mvcResult = mockMvc.perform(post(url + "/updateUserName").params(params))
-                .andReturn();
+        params.add("username", username);
+        params.add("password", password);
+
+
+        MvcResult mvcResult = mockMvc.perform(post(url+"/register/information").params(params)).andReturn();
         String content = mvcResult.getResponse().getContentAsString();
         System.out.println(content);
+    }
+
+    @Test
+    public void verifyUser() throws Exception {
+
+    }
+
+    @Test
+    public void personalInfoPage() throws Exception {
+
     }
 }
