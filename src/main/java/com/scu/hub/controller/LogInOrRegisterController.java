@@ -77,7 +77,7 @@ public class LogInOrRegisterController {
                                @RequestParam("password") String password) {
         User user = userMapper.getUserById(userId);
         if (user.getPassword().equals(password)) {
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("user", user.toString());
             return ResponseStatus.SUCCESS;
         } else
             return ResponseStatus.FAIL;
