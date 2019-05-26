@@ -1,10 +1,7 @@
 package com.scu.hub.mapper;
 
 import com.scu.hub.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -25,4 +22,9 @@ public interface UserMapper {
     public Integer insertUser(@Param("userId")String userId,
                              @Param("username")String username,
                              @Param("password")String password);
+
+
+    @Update("UPDATE `user` SET username = #{username} WHERE  user_id=#{userId}")
+    public Integer updateUserName(@Param("username")String username,
+                                  @Param("userId")String userId);
 }

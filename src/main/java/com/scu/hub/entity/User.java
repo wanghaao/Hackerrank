@@ -5,7 +5,7 @@ import java.sql.Date;
 public class User {
 
 
-    private String user_id;
+    private String userId;
     private String  username;
     private String password;
     private Boolean gender;
@@ -13,10 +13,8 @@ public class User {
     private Date birth;
     private String description;
 
-    public User(String userId, String username, String password,
-                Boolean gender, Integer age, Date birth,
-                String description) {
-        this.user_id = userId;
+    public User(String userId, String username, String password, Boolean gender, Integer age, Date birth, String description) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.gender = gender;
@@ -25,15 +23,12 @@ public class User {
         this.description = description;
     }
 
-    public User() {
+    public String getUserId() {
+        return userId;
     }
 
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -87,7 +82,7 @@ public class User {
     @Override
     public String toString() {
         return "{" +
-                "user_id='" + user_id + '\'' +
+                "userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", gender=" + gender +

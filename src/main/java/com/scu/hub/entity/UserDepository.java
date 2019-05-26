@@ -3,12 +3,16 @@ package com.scu.hub.entity;
 public class UserDepository {
     private String userId;
     private Integer depositoryId;
-    private Integer privilege;
+    private Integer roleId;
+    private Boolean thumbsUp;
+    private Boolean  collection;
 
-    public UserDepository(String userId, Integer depositoryId, Integer privilege) {
+    public UserDepository(String userId, Integer depositoryId, Integer roleId, Boolean thumbsUp, Boolean collection) {
         this.userId = userId;
         this.depositoryId = depositoryId;
-        this.privilege = privilege;
+        this.roleId = roleId;
+        this.thumbsUp = thumbsUp;
+        this.collection = collection;
     }
 
     public String getUserId() {
@@ -27,12 +31,27 @@ public class UserDepository {
         this.depositoryId = depositoryId;
     }
 
-    public Integer getPrivilege() {
-        return privilege;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setPrivilege(Integer privilege) {
-        this.privilege = privilege;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
+    public Boolean getThumbsUp() {
+        return thumbsUp;
+    }
+
+    public void setThumbsUp(Boolean thumbsUp) {
+        this.thumbsUp = thumbsUp;
+    }
+
+    public Boolean getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Boolean collection) {
+        this.collection = collection;
+    }
 }

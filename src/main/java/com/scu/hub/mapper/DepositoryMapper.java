@@ -1,10 +1,7 @@
 package com.scu.hub.mapper;
 
 import com.scu.hub.entity.Depository;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,12 +14,10 @@ public interface DepositoryMapper {
     @Insert("INSERT depository(depository_id," +
             "depository_name," +
             "depository_visiable," +
-            "depository_like," +
-            "depository_collection," +
             "depository_classification_id," +
             "tags)\n" +
             "VALUES(#{depositoryId},#{depositoryName}," +
-            "#{depositoryVisible},0,0," +
+            "#{depositoryVisible}," +
             "#{depositoryClassificationId},#{tags})")
     public Integer insertDepository(@Param("depositoryId") Integer depositoryId,
                                     @Param("depositoryName") String depositoryName,
@@ -33,4 +28,10 @@ public interface DepositoryMapper {
     @Select("SELECT MAX(depository.depository_id) as max_id FROM depository;")
     public Integer getMaxId();
 
+    @Update("UPDATE depository SET depository.depository_visiable = #{visible} WHERE depository_id = #{depositoryId}")
+    public Integer setVisibleById(@Param("visible") Integer visible,
+                                  @Param("depositoryId") Integer depositoryId);
+
+    @Select("SELECT * from depository WHERE depository_name LIKE #{keyword} AND depository_visiable=1")
+    public List<Depository> keywordMatching(@Param("keyword") String keyword);
 }

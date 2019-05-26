@@ -1,5 +1,6 @@
 package com.scu.hub.controller;
 
+import com.scu.hub.controller.enumInfo.ResponseStatus;
 import com.scu.hub.entity.Depository;
 import com.scu.hub.entity.User;
 import com.scu.hub.entity.UserDepository;
@@ -52,9 +53,13 @@ public class LogInOrRegisterController {
 
         User user = userMapper.getUserById(userId);
         if (user == null) {
-            return userMapper.insertUser(userId, username, password);
+            try {
+                return userMapper.insertUser(userId, username, password);
+            }catch (Exception e){
+                return ResponseStatus.FAIL;
+            }
         } else {
-            return 0;
+            return ResponseStatus.FAIL;
         }
     }
 
@@ -73,16 +78,16 @@ public class LogInOrRegisterController {
         User user = userMapper.getUserById(userId);
         if (user.getPassword().equals(password)) {
             request.getSession().setAttribute("user", user);
-            return 1;
+            return ResponseStatus.SUCCESS;
         } else
-            return 0;
+            return ResponseStatus.FAIL;
     }
 
     /**
-     * 个人信息界面，返回仓库的基本信息和个人基本信息
+     * 个人信息界面
      * @param request
      * @param userId
-     * @return
+     * @return 仓库的基本信息和个人基本信息
      */
     @PostMapping("/userInfo")
     @ResponseBody
@@ -93,13 +98,18 @@ public class LogInOrRegisterController {
 
         JSONArray jsonArray = new JSONArray();
         for (UserDepository userDepository : userDepositories) {
-            int privilege= userDepository.getPrivilege();
+            int privilege= userDepository.getRoleId();
             Depository depository =
                     depositoryMapper.getDepositoryById(userDepository.getDepositoryId());
+
+            int collectionNumber = userDepositoryMapper.getDepositoryCollectionNumber(depository.getDepositoryId());
+            int thumbsUpNumber = userDepositoryMapper.getDepositoryThumsUpNumber(depository.getDepositoryId());
 
             JSONObject jsonObject = new JSONObject();
             JSONObject depositoryObject = JSONObject.fromObject(depository.toString());
             jsonObject.put("privilege",privilege);
+            jsonObject.put("collectionNumber",collectionNumber);
+            jsonObject.put("thumbsUpNumber",thumbsUpNumber);
             jsonObject.put("depository",depositoryObject);
             jsonArray.add(jsonObject);
         }

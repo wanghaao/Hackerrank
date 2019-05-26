@@ -1,21 +1,28 @@
 package com.scu.hub.controller;
 
+import com.scu.hub.controller.enumInfo.DepositoryVisible;
+import com.scu.hub.controller.enumInfo.Role;
+import com.scu.hub.controller.enumInfo.ResponseStatus;
 import com.scu.hub.entity.Depository;
+import com.scu.hub.entity.UserDepository;
 import com.scu.hub.mapper.DepositoryMapper;
 import com.scu.hub.mapper.UserDepositoryMapper;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/depository")
+@Slf4j
 public class DepositoryController {
 
     @Resource
@@ -23,19 +30,6 @@ public class DepositoryController {
 
     @Resource
     UserDepositoryMapper userDepositoryMapper;
-
-    /**
-     * 获取某个用户的全部仓库
-     *
-     * @return
-     */
-    private String getUserDepository() {
-        /**
-         * 使用session获取当前登陆用户的信息，
-         * 查询用户，返回仓库信息
-         */
-        return "仓库信息";
-    }
 
     /**
      * 创建仓库
@@ -49,24 +43,28 @@ public class DepositoryController {
      */
     @PostMapping("/create")
     private String createDepository(@RequestParam("depositoryName") String depositoryName,
-                                     @RequestParam("depositoryOwnerId") String depositoryOwnerId,
-                                     @RequestParam("depositoryVisible") Boolean depositoryVisible,
-                                     @RequestParam("depositoryClassificationId") Integer depositoryClassificationId,
-                                     @RequestParam("tags") String tags) {
+                                    @RequestParam("depositoryOwnerId") String depositoryOwnerId,
+                                    @RequestParam("depositoryVisible") Boolean depositoryVisible,
+                                    @RequestParam("depositoryClassificationId") Integer depositoryClassificationId,
+                                    @RequestParam("tags") String tags) {
 
-        int id = depositoryMapper.getMaxId() + 1;
+        int depositoryId = depositoryMapper.getMaxId() + 1;
+
+        JSONObject jsonObject = new JSONObject();
 
         try {
-            Integer statusOfInsertDepository = depositoryMapper.insertDepository(id,
-                    depositoryName, depositoryVisible, depositoryClassificationId, tags);
-            Integer statusOfInsertUserDepository = userDepositoryMapper.insertUserDepository(depositoryOwnerId, id, 0);
-        }catch (Exception e){
-            e.printStackTrace();
-            return "0";
+            //创建新仓库
+            depositoryMapper.insertDepository(depositoryId, depositoryName, depositoryVisible, depositoryClassificationId, tags);
+            //添加所有者
+            userDepositoryMapper.inserUserDepository(depositoryOwnerId, depositoryId);
+            userDepositoryMapper.updateRole(Role.OWNER, depositoryOwnerId, depositoryId);
+
+            jsonObject.put("depositoryId", depositoryId);
+            jsonObject.put("status", ResponseStatus.SUCCESS);
+        } catch (Exception e) {
+            log.info("新仓库创建失败");
+            jsonObject.put("status", ResponseStatus.FAIL);
         }
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("depositoryId",id);
-        jsonObject.put("status",1);
         return jsonObject.toString();
     }
 
@@ -76,20 +74,71 @@ public class DepositoryController {
      * @param keyword
      * @return
      */
-    @PostMapping("/findDepository")
-    private String findDepository(@RequestParam("keywords") String keyword) {
-        return "findOK";
+    @PostMapping("/keywordMatching")
+    private List<Depository> keywordMatching(@RequestParam("keyword") String keyword) {
+        return depositoryMapper.keywordMatching("%" + keyword + "%");
     }
 
     /**
-     * 添加仓库的参与人员
+     * 添加仓库的管理员
      *
      * @param userId
      * @return
      */
-    @PostMapping("/addDepositoryUser")
-    private String addDepositoryUser(@RequestParam("user_id") String userId) {
-        return "addDepositoryUser ok";
+    @PostMapping("/addDepositoryManager")
+    private Integer addDepositoryManager(@RequestParam("userId") String userId,
+                                         @RequestParam("depositoryId") Integer depositoryId) {
+        try {
+            UserDepository userDepository = userDepositoryMapper.getUserDepositoryByUserIdAndDeId(userId, depositoryId);
+            if (userDepository == null) {
+                userDepositoryMapper.inserUserDepository(userId, depositoryId);
+            }
+            userDepositoryMapper.updateRole(Role.MANAGER, userId, depositoryId);
+            userDepositoryMapper.updateCollection(true, userId, depositoryId);
+            return ResponseStatus.SUCCESS;
+        } catch (Exception e) {
+            log.info("添加管理员出错");
+        }
+        return ResponseStatus.FAIL;
+    }
+
+    /**
+     * 通过id获取仓库信息
+     *
+     * @param depositoryId
+     * @return
+     */
+    @PostMapping("/getDepositoryById")
+    private String getDepositoryById(@RequestParam("depositoryId") Integer depositoryId) {
+
+        int collectionNumber = userDepositoryMapper.getDepositoryCollectionNumber(depositoryId);
+        int thumbsUpNumber = userDepositoryMapper.getDepositoryThumsUpNumber(depositoryId);
+
+        Depository depository = depositoryMapper.getDepositoryById(depositoryId);
+        JSONObject depositoryJsonObject = JSONObject.fromObject(depository);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("collectionNumber", collectionNumber);
+        jsonObject.put("thumbsUpNumber", thumbsUpNumber);
+        jsonObject.put("depository", depositoryJsonObject);
+        return jsonObject.toString();
+    }
+
+    /**
+     * 设置仓库可见性
+     *
+     * @param visible
+     * @param depositoryId
+     * @return
+     */
+    @PostMapping("/setVisibleById")
+    private Integer setVisibleById(@RequestParam("visible") Boolean visible,
+                                   @RequestParam("depositoryId") Integer depositoryId) {
+        if (visible) {
+            depositoryMapper.setVisibleById(DepositoryVisible.VISIBLE, depositoryId);
+        } else {
+            depositoryMapper.setVisibleById(DepositoryVisible.UNVISIBLE, depositoryId);
+        }
+        return ResponseStatus.SUCCESS;
     }
 
 
@@ -99,19 +148,70 @@ public class DepositoryController {
      * @param depositoryId
      * @return
      */
-    @PostMapping("/depositoryLike")
-    private String depositoryLike(@RequestParam("depository_id") String depositoryId) {
-        return "das";
+    @PostMapping("/depositoryThumbsUp")
+    private Integer depositoryLike(@RequestParam("depositoryId") Integer depositoryId,
+                                   @RequestParam("userId") String userId,
+                                   @RequestParam("thumbsUp") boolean thumbsUp) {
+        try {
+            UserDepository userDepository = userDepositoryMapper.getUserDepositoryByUserIdAndDeId(userId, depositoryId);
+            if (userDepository == null) {
+                userDepositoryMapper.inserUserDepository(userId, depositoryId);
+            }
+            userDepositoryMapper.updateThumbsUp(thumbsUp, userId, depositoryId);
+            return ResponseStatus.SUCCESS;
+        } catch (Exception e) {
+            log.info("点赞失败");
+        }
+        return ResponseStatus.FAIL;
+    }
+
+    /**
+     * 添加一个仓库的协作者
+     *
+     * @param depositoryId
+     * @param userId
+     * @return
+     */
+    @PostMapping("/addDepositoryMember")
+    private Integer addDepositoryMember(@Param("userId") String userId,
+                                        @Param("depositoryId") Integer depositoryId) {
+
+        try {
+            UserDepository userDepository = userDepositoryMapper.getUserDepositoryByUserIdAndDeId(userId, depositoryId);
+            if (userDepository == null) {
+                userDepositoryMapper.inserUserDepository(userId, depositoryId);
+            }
+            userDepositoryMapper.updateRole(Role.PARTNER, userId, depositoryId);
+            userDepositoryMapper.updateCollection(true, userId, depositoryId);
+            return ResponseStatus.SUCCESS;
+        } catch (Exception e) {
+            log.info("添加协作者失败");
+        }
+        return ResponseStatus.FAIL;
     }
 
     /**
      * 收藏
      *
-     * @param depository_id 仓库的id
-     * @return 收藏的结果
+     * @param userId       用户Id
+     * @param depositoryId 仓库id
+     * @return
      */
     @PostMapping("/collection")
-    private String depositoryCollection(@RequestParam("depository_id") String depository_id) {
-        return "collection";
+    private Integer depositoryCollection(@Param("userId") String userId,
+                                         @Param("depositoryId") Integer depositoryId,
+                                         @Param("collection") boolean collection) {
+        try {
+            UserDepository userDepository = userDepositoryMapper.getUserDepositoryByUserIdAndDeId(userId, depositoryId);
+            if (userDepository == null) {
+                userDepositoryMapper.inserUserDepository(userId, depositoryId);
+            }
+            userDepositoryMapper.updateCollection(collection, userId, depositoryId);
+            return ResponseStatus.SUCCESS;
+        } catch (Exception e) {
+            log.info("收藏失败");
+        }
+        return ResponseStatus.FAIL;
     }
 }
+
