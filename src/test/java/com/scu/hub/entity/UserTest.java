@@ -9,7 +9,7 @@ public class UserTest {
 
     User user;
     @Before
-    private void before(){
+    public void before(){
         user = new User("user123", "namename", "123456", true, 11, new Date(2000, 01, 01), "dedde");
     }
 

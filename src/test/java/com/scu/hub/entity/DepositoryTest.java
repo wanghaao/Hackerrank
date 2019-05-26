@@ -7,7 +7,7 @@ public class DepositoryTest {
 
     Depository depository;
     @Before
-    private void before() {
+    public void before() {
         depository = new Depository(111, "fdsaga", "//", true, 11, "tag");
     }
 

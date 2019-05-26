@@ -9,7 +9,7 @@ public class UserDepositoryTest {
 
     UserDepository userDepository;
     @Before
-    private void before() {
+    public void before() {
         userDepository = new UserDepository("user1", 1, 0, true, true);
     }
 
