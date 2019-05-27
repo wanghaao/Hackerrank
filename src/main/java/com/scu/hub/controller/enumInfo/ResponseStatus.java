@@ -1,4 +1,4 @@
-package com.scu.hub.controller.enumInfo;
+package com.scu.hub.controller.enuminfo;
 
 public class ResponseStatus {
     public static final Integer FAIL = 0;//失败

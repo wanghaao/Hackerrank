@@ -1,4 +1,4 @@
-package com.scu.hub.controller.enumInfo;
+package com.scu.hub.controller.enuminfo;
 
 public class Role {
     public static final Integer OWNER = 0;//拥有，所以增删改查

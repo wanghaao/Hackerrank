@@ -1,0 +1,217 @@
+.main-sidebar{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	min-height: 100%;
+    width: 13%;
+    min-width: 177px;
+	z-index: 810;
+	background-color: #222d32;
+}
+
+.functionBlock {
+    width: 87%;
+    height: 92%;
+    background-color: aliceblue;
+    position: absolute;
+    right: 0;
+    margin-top: 78px;
+    border-top: 1px solid #dbdbdb;
+    box-shadow: #dbdbdb 0 7px 4px -2px inset;
+}
+
+.toolsBlock {
+    width: 100%;
+    height: 50px;
+    background-color: #f4f4f4;
+    margin: 10px 0;
+    box-shadow: #dbdbdb 0 7px 4px -2px;
+    text-align: left;
+}
+.toolsBlock .line {
+    display: inline-block;
+    width: 110px;
+    padding: 0 5px;
+    margin-left: 10px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+.toolsBlock .line:hover {
+    background-color: #dbdbdb;
+    font-weight: bold;
+    border-bottom: 2px solid #bbbbbb;
+}
+
+.depositoryBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    margin-top: 9px;
+    cursor: pointer;
+}
+.block:hover {
+    background-color: #f4f4f4;
+    box-shadow: #dbdbdb 7px 7px 4px -2px;
+    border: 1px solid #f7f7f7;
+    font-size: 15px;
+    border-radius: 8px;
+}
+.block img {
+    width: 100%;
+}
+.block .blockTitle {
+    max-width: 150px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding: 5px 0;
+}
+
+.file {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    padding: 10px 20px;
+    margin-left: 20px;
+    margin-top: 9px;
+    cursor: pointer;
+}
+.file:hover {
+    background-color: #f4f4f4;
+    box-shadow: #dbdbdb 7px 7px 4px -2px;
+    border: 1px solid #f7f7f7;
+    font-size: 15px;
+    border-radius: 8px;
+}
+.file img {
+    width: 100%;
+}
+.file .blockTitle {
+    max-width: 150px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    padding: 5px 0;
+}
+
+
+
+.authBlock {
+    display: flex;
+    flex-direction: column;
+    width: 410px; 
+    padding: 20px 20px;
+    margin-left: 20px;
+    margin-top: 9px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: #dbdbdb 7px 7px 4px -2px;
+}
+
+.authBlock .depositoryName {
+    padding: 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.authBlock .assistorLine {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.authBlock .assistorLine .assistorTitle,
+.authBlock .managerLine .managerTitle {
+    text-align: left;
+    padding: 7px 0 10px 0;
+    font-size: 16px;
+}
+.authBlock .assistorLine .assistorList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.authBlock .assistorLine .assistorList .assistorInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding: 7px 3px;
+    background-color: #D0D0D0;
+    border-radius: 3px;
+}
+.authBlock .assistorLine .assistorList .funcOption {
+    display: flex;
+    flex-direction: column;
+}
+.authBlock .assistorLine .assistorList .funcOption img {
+    width: 16px;
+    height: 16px;
+}
+.authBlock .assistorLine .assistorList .funcOption .top {
+    margin-bottom: 10px;
+}
+.authBlock .assistorLine .add {
+    width: 80px;
+    height: 56px;
+    line-height: 42px;
+    margin-left: 10px;
+    padding: 7px 3px;
+    background-color: #D0D0D0;
+    border-radius: 3px;
+}
+.authBlock .assistorLine .add img{
+    width: 32px;
+    height: 32px; 
+}
+
+.authBlock .managerLine .managerList {
+    display: flex;
+    flex-direction: row;
+}
+.authBlock .managerLine .managerName {
+    width: 64px;
+    padding: 10px 0;
+    margin-left: 10px;
+    border: 1px solid #bdbdbd;
+    border-radius: 7px;
+}
+
+.infoWrapper {
+    margin: 25px 35px;
+    height: 60px;
+}
+.infoWrapper .infoLine label {
+    font-size: 19px;
+}
+.infoWrapper .infoLine input {
+    margin: 0 0 0 10px;
+    border: none;
+    width: 295px;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 0 0 10px;
+}
+
+.name {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>SCU Note Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="./css/navbar.css" rel="stylesheet" type="text/css" />
+    <link href="./css/answer.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link
+      href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+
+  <body>
+    <div id="content">
+      <ul class="button-list">
+        <li><a href='javascript:;' class='button' onClick="return false;">Home</a></li>
+        <li class="search">
+          <input
+            id="toSearchName"
+            type="text"
+            class="search-input"
+            name="search"
+            value="Search"
+            onClick="$(this).val('');"
+          /><input type="submit" class="search-submit" />
+        </li>
+      </ul>
+    </div>
+    <div class="answerWrapper">
+<!--      <div class="answerBlock">-->
+<!--        <div class="depositoryName">-->
+<!--          管理仓库名: 数据结构-->
+<!--        </div>-->
+<!--        <div class="classfyName">-->
+<!--          <span class="classfyTitle">仓库分类: </span>-->
+<!--          <span class="classfy">计算机</span>-->
+<!--        </div>-->
+<!--        <div class="tagWrapper">-->
+<!--          <div class="tagTitle">仓库标签</div>-->
+<!--          <div class="tagList">-->
+<!--            <div class="tag">逗逼</div>-->
+<!--            <div class="tag">来搞笑</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="goodLikeWrapper">-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+  </body>
+  <script>
+    var searchUrl = window.location.href;
+    var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+    var searchText = decodeURI(searchData[1]); //decodeURI解码
+    console.log(searchText);
+    $(function() {
+      var depositories = [];
+      var depositoryClassification = [
+              "哲学","经济学","法学","教育学","文学","历史学",
+        "理学","工学","农学","医学","军事学","管理学","艺术学"
+      ];
+      $.ajax({
+        type: "POST",
+        url: "/depository/keywordMatching",
+        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+        async: false,
+        data: {
+          keyword: searchText
+        },
+        dataType: "json",
+        success: function (data) {
+          console.log(data)
+          depositories = data;
+          for(var i in depositories) {
+            $("<div>", {
+              id: depositories[i].depositoryId,
+              "class": 'answerBlock',
+              "data-id": depositories[i].depositoryId,
+              click: function (e) {
+                console.log(this)
+              //  去查看仓库
+              }
+            }).appendTo(".answerWrapper");
+            $("<div>", {
+              "class": "depositoryName",
+              "text": "管理仓库名:" + depositories[i].depositoryName
+            }).appendTo("#" + depositories[i].depositoryId);
+            var spanClassfyTitle = $("<span class='classfyTitle'>仓库分类: </span>");
+            var spanClassfy = $("<span class='classfy'>"+ depositoryClassification[depositories[i].depositoryClassificationId] +"</span>");
+            $("<div>", {
+              "class": "classfyName",
+              id:  depositories[i].depositoryId + "" + i
+            }).appendTo("#" + depositories[i].depositoryId);
+            $('#'+ depositories[i].depositoryId+ '' + i).append(spanClassfyTitle);
+            $('#'+ depositories[i].depositoryId+ '' + i).append(spanClassfy);
+
+            $("<div>", {
+              "class": "tagWrapper",
+              id: depositories[i].depositoryId + "" + i + "1"
+            }).appendTo("#" + depositories[i].depositoryId);
+            var spanTagTitle = $("<div class='tagTitle'>仓库标签: </div>");
+            $('#'+ depositories[i].depositoryId + "" + i + "1").append(spanTagTitle);
+            $("<div>", {
+              "class": "tagList",
+              id: depositories[i].depositoryId + "" + i + "2"
+            }).appendTo('#'+ depositories[i].depositoryId + "" + i + "1");
+
+            var tmpTags = depositories[i].tags.split(';');
+            console.log(tmpTags)
+            for (var j = 0 ; j < tmpTags.length-1; j++) {
+              $("<div>", {
+                "class": "tag",
+                "text" : tmpTags[j]
+              }).appendTo('#'+ depositories[i].depositoryId + "" + i + "2");
+            }
+          }
+
+        },
+        error: function (e) {
+          console.log(e);
+        }
+      });
+
+      $('#toSearchName').blur(function () {
+        console.log($('#toSearchName').val())
+        if($('#toSearchName').val()) {
+          var toSearchName = encodeURI("/searchAnswerPage?searchName=" + $('#toSearchName').val()); //使用encodeURI编码
+          location.href = toSearchName;
+        } else {
+          alert("搜索框不能为空！");
+        }
+      });
+    });
+  </script>
+</html>

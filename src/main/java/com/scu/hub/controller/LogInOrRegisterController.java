@@ -1,6 +1,6 @@
 package com.scu.hub.controller;
 
-import com.scu.hub.controller.enumInfo.ResponseStatus;
+import com.scu.hub.controller.enuminfo.ResponseStatus;
 import com.scu.hub.entity.Depository;
 import com.scu.hub.entity.User;
 import com.scu.hub.entity.UserDepository;
@@ -38,6 +38,28 @@ public class LogInOrRegisterController {
         return "login";
     }
 
+    @GetMapping("/home")
+    private String homePage() {
+        return "home";
+    }
+    @GetMapping("/userDepositoryPage")
+    private String userDepositoryPage() {
+        return "userDepository";
+    }
+    @GetMapping("/userInfoPage")
+    private String userInfoPage(){
+        return "userInfo";
+    }
+
+    @GetMapping("/searchAnswerPage")
+    private String searchAnswerPage(){
+        return "serachAnswer";
+    }
+
+    @GetMapping("/authorityPage")
+    private String authorityPage(){
+        return "authority";
+    }
     /**
      * 注册信息
      *
@@ -55,7 +77,7 @@ public class LogInOrRegisterController {
         if (user == null) {
             try {
                 return userMapper.insertUser(userId, username, password);
-            }catch (Exception e){
+            } catch (Exception e) {
                 return ResponseStatus.FAIL;
             }
         } else {
@@ -77,7 +99,7 @@ public class LogInOrRegisterController {
                                @RequestParam("password") String password) {
         User user = userMapper.getUserById(userId);
         if (user.getPassword().equals(password)) {
-            request.getSession().setAttribute("user", user.toString());
+            request.getSession().setAttribute("userId", userId);
             return ResponseStatus.SUCCESS;
         } else
             return ResponseStatus.FAIL;
@@ -85,6 +107,7 @@ public class LogInOrRegisterController {
 
     /**
      * 个人信息界面
+     *
      * @param request
      * @param userId
      * @return 仓库的基本信息和个人基本信息
@@ -93,12 +116,14 @@ public class LogInOrRegisterController {
     @ResponseBody
     private String personalInfoPage(HttpServletRequest request,
                                     @RequestParam("userId") String userId) {
+
+//        String useridx = (String)request.getSession().getAttribute("userId");
         User user = userMapper.getUserById(userId);
         List<UserDepository> userDepositories = userDepositoryMapper.getUserDepoByUserId(userId);
 
         JSONArray jsonArray = new JSONArray();
         for (UserDepository userDepository : userDepositories) {
-            int privilege= userDepository.getRoleId();
+            int privilege = userDepository.getRoleId();
             Depository depository =
                     depositoryMapper.getDepositoryById(userDepository.getDepositoryId());
 
@@ -107,17 +132,17 @@ public class LogInOrRegisterController {
 
             JSONObject jsonObject = new JSONObject();
             JSONObject depositoryObject = JSONObject.fromObject(depository.toString());
-            jsonObject.put("privilege",privilege);
-            jsonObject.put("collectionNumber",collectionNumber);
-            jsonObject.put("thumbsUpNumber",thumbsUpNumber);
-            jsonObject.put("depository",depositoryObject);
+            jsonObject.put("privilege", privilege);
+            jsonObject.put("collectionNumber", collectionNumber);
+            jsonObject.put("thumbsUpNumber", thumbsUpNumber);
+            jsonObject.put("depository", depositoryObject);
             jsonArray.add(jsonObject);
         }
         JSONObject userObject = JSONObject.fromObject(user.toString());
 
         JSONObject result = new JSONObject();
-        result.put("user",userObject);
-        result.put("depositories",jsonArray);
+        result.put("user", userObject);
+        result.put("depositories", jsonArray);
         return result.toString();
     }
 

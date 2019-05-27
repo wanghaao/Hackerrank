@@ -15,10 +15,16 @@ public interface UserDepositoryMapper {
     @Select("SELECT  * FROM user_depository WHERE user_id = #{userId} ")
     public List<UserDepository> getUserDepoByUserId(@Param("userId") String userId);
 
+    @Select("SELECT  depository_id FROM user_depository WHERE user_id = #{userId} AND role_id=0")
+    public List<Integer> getUserOwnerDepoByUserId(@Param("userId") String userId);
+
 
     @Select("SELECT * FROM user_depository WHERE user_id =#{userId} AND depository_id=#{depositoryId}")
     public UserDepository getUserDepositoryByUserIdAndDeId(@Param("userId") String userId,
                                                            @Param("depositoryId") Integer depositoryId);
+
+    @Select("SELECT * FROM user_depository WHERE depository_id=#{depositoryId}")
+    public List<UserDepository> getUserDepoByDepositoryId(@Param("depositoryId") Integer depositoryId);
 
     /***
      * 插入一条新的数据，除去主键外，全部为默认值

@@ -1,13 +1,16 @@
 package com.scu.hub.controller;
 
-import com.scu.hub.controller.enumInfo.DepositoryVisible;
-import com.scu.hub.controller.enumInfo.Role;
-import com.scu.hub.controller.enumInfo.ResponseStatus;
+import com.scu.hub.controller.enuminfo.DepositoryVisible;
+import com.scu.hub.controller.enuminfo.Role;
+import com.scu.hub.controller.enuminfo.ResponseStatus;
 import com.scu.hub.entity.Depository;
+import com.scu.hub.entity.User;
 import com.scu.hub.entity.UserDepository;
 import com.scu.hub.mapper.DepositoryMapper;
 import com.scu.hub.mapper.UserDepositoryMapper;
+import com.scu.hub.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -23,11 +27,16 @@ import java.util.List;
 @Slf4j
 public class DepositoryController {
 
+    private final static String filePath = "C:\\allFiles";
+
     @Resource
     DepositoryMapper depositoryMapper;
 
     @Resource
     UserDepositoryMapper userDepositoryMapper;
+
+    @Resource
+    UserMapper userMapper;
 
     /**
      * 创建仓库
@@ -47,9 +56,7 @@ public class DepositoryController {
                                     @RequestParam("tags") String tags) {
 
         int depositoryId = depositoryMapper.getMaxId() + 1;
-
         JSONObject jsonObject = new JSONObject();
-
         try {
             //创建新仓库
             depositoryMapper.insertDepository(depositoryId, depositoryName, depositoryVisible, depositoryClassificationId, tags);
@@ -57,6 +64,14 @@ public class DepositoryController {
             userDepositoryMapper.inserUserDepository(depositoryOwnerId, depositoryId);
             userDepositoryMapper.updateRole(Role.OWNER, depositoryOwnerId, depositoryId);
 
+            //创建文件夹
+            File dir = new File(filePath+"\\"+depositoryName);
+            if (!dir.exists()) {
+                dir.mkdirs();
+                jsonObject.put("filepathStatus","1");
+            }else{
+                jsonObject.put("filepathStatus","0");
+            }
             jsonObject.put("depositoryId", depositoryId);
             jsonObject.put("status", ResponseStatus.SUCCESS);
         } catch (Exception e) {
@@ -129,9 +144,9 @@ public class DepositoryController {
      * @return
      */
     @PostMapping("/setVisibleById")
-    private Integer setVisibleById(@RequestParam("visible") Boolean visible,
+    private Integer setVisibleById(@RequestParam("visible") String visible,
                                    @RequestParam("depositoryId") Integer depositoryId) {
-        if (visible) {
+        if (visible.equals("true")) {
             depositoryMapper.setVisibleById(DepositoryVisible.VISIBLE, depositoryId);
         } else {
             depositoryMapper.setVisibleById(DepositoryVisible.UNVISIBLE, depositoryId);
@@ -210,6 +225,35 @@ public class DepositoryController {
             log.info("收藏失败");
         }
         return ResponseStatus.FAIL;
+    }
+
+
+    @PostMapping("/getOwnerDepositorDetailInfo")
+    private String getOwnerDepositoryDetailInfo(@RequestParam("userId") String userId) {
+        List<Integer> depositoryIds = userDepositoryMapper.getUserOwnerDepoByUserId(userId);
+
+        JSONArray jsonArray = new JSONArray();
+        for (Integer depositoryId : depositoryIds) {
+            JSONObject jsonObject = new JSONObject();
+            JSONObject depositoryObject = JSONObject.fromObject(depositoryMapper.getDepositoryById(depositoryId));
+            List<UserDepository> userDepositories =
+                    userDepositoryMapper.getUserDepoByDepositoryId(depositoryId);
+            JSONArray managerArray = new JSONArray();
+            JSONArray partnerArray = new JSONArray();
+            for (UserDepository userDepo : userDepositories) {
+                User user = userMapper.getUserById(userDepo.getUserId());
+                if (userDepo.getRoleId() == Role.MANAGER) {
+                    managerArray.add(JSONObject.fromObject(user.toString()));
+                }else if(userDepo.getRoleId()==Role.PARTNER){
+                    partnerArray.add(JSONObject.fromObject(user.toString()));
+                }
+            }
+            jsonObject.put("depositoryInfo",depositoryObject);
+            jsonObject.put("manager",managerArray);
+            jsonObject.put("partner",partnerArray);
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray.toString();
     }
 }
 

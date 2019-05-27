@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SCU Note Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/sidebar-menu.css">
+    <link href="./css/navbar.css" rel="stylesheet" type="text/css">
+    
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/jquery.contextify.js"></script>
+
+    <script src="js/jquery.ui.position.min.js" type="text/javascript"></script>
+    <script src="js/contextMenu.js" type="text/javascript"></script>
+    <link href="css/contextMenu.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/userDepository.css">
+</head>
+
+<body>
+    <div id="content">
+        <ul class="button-list">
+            <li><a href='javascript:;' class='button' onClick="return false;">Home</a></li>
+            <li class="search"><input id="toSearchName" type="text" class="search-input" name="search" value="Search"
+                    onClick="$(this).val('');" /><input type="submit" class="search-submit" /></li>
+        </ul>
+    </div>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="header">功能列表</li>
+                <li class="treeview">
+                    <a href="javascript:;">
+                        <i class="fa fa-address-card-o"></i>
+                        <span>用户信息</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="javascript:;">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>仓库管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="javascript:;"><i class="fa fa-circle-o"></i>添加note仓库</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="javascript:;">
+                        <i class="fa fa-laptop"></i>
+                        <span>文件管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="javascript:;"><i class="fa fa-circle-o"></i>上传文件</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="javascript:;">
+                        <i class="fa fa-edit"></i> <span class="toAuthority">协作者管理</span>
+                    </a>
+                </li>
+                <li class="header">其他功能</li>
+                <li><a href="javascript:;"><i class="fa fa-circle-o text-red"
+                            style="color:red"></i><span>退出登录</span></a></li>
+            </ul>
+        </section>
+    </aside>
+    <script src="./js/sidebar-menu.js"></script>
+    <script>
+        $.sidebarMenu($('.sidebar-menu'))
+    </script>
+    <div class="functionBlock">
+        <div class="toolsBlock">
+            <div class="line" id="update">上传更改</div>
+        </div>
+        <div class="depositoryBlock">
+            <div class="infoWrapper">
+                <div class="infoLine">
+                    <label>Username</label>
+                    <input placeholder="Please enter your personal nickname" type="text" name="name" class="lowin-input" id="name">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var searchUrl = window.location.href;
+        var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+        var searchText = decodeURI(searchData[2]); //decodeURI解码
+        console.log(searchText);
+        var userId = searchData[1];
+        var tmpInfo = userId.split('&');
+        userId = tmpInfo[0];
+        console.log(userId)
+        $(function () {
+            $('#name').val(searchText);
+
+            $('#update').click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/user/updateUserName",
+                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                    data: {
+                        userId: userId,
+                        username: $('#name').val()
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        if(data) {
+                            alert("修改成功");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+            })
+
+
+            $('#toSearchName').blur(function () {
+                console.log($('#toSearchName').val())
+                if($('#toSearchName').val()) {
+                    var toSearchName = encodeURI("/searchAnswerPage?searchName=" + $('#toSearchName').val()); //使用encodeURI编码
+                    location.href = toSearchName;
+                } else {
+                    alert("搜索框不能为空！");
+                }
+            });
+            $(".toAuthority").click(function () {
+                var toAuthority = encodeURI("/authorityPage?userId=" + userInfo.userId); //使用encodeURI编码
+                location.href = toAuthority;
+            });
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SCU Note Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/navbar.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link
+        href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div id="content">
+
+        <ul class="button-list">
+            <li><a href='javascript:;' class='button' onClick="return false;">Home</a></li>
+            <li><a href='javascript:;' class='button' onClick="return false;" id="login">Login</a></li>
+            <li><a href='javascript:;' class='button' onClick="return false;" id="register">Register</a></li>
+            <li class="search"><input type="text" class="search-input" name="search" value="Search"
+                    onClick="$(this).val('');" /><input type="submit" class="search-submit" /></li>
+        </ul>
+        <!-- <ul class="vertical-list">
+            <li><a href='javascript:;' class='button' onClick="return false;">Home</a></li>
+            <li><a href='javascript:;' class='button' onClick="return false;">Our Studio</a></li>
+            <li><a href='javascript:;' class='button' onClick="return false;">Portfolio</a></li>
+            <li><a href='javascript:;' class='button' onClick="return false;">Our Team</a></li>
+            <li><a href='javascript:;' class='button' onClick="return false;">Get in Touch</a></li>
+        </ul> -->
+    </div>
+    <div class="search">
+        <i> </i>
+        <div class="s-bar">
+                <input id="searchName" type="text" value="Search Template" onfocus="this.value = '';"
+                    onblur="if (this.value == '') {this.value = 'Search Course';}">
+                <input id="toSearch" type="submit" value="Search" />
+            <p>Popular searches: <a href="javascript:;">数据结构,</a> <a href="javascript:;">"vivo",</a> <a href="javascript:;">南京大学 </a></p>
+        </div>
+        
+    </div>
+    <!--search end here-->
+    <div class="copyright">
+    </div>
+
+
+
+</body>
+<script>
+    $(function () {
+			$("#login").click(function () {
+				var toLogin = encodeURI("/login/page?isLogin=" + 0); //使用encodeURI编码
+                location.href = toLogin;
+			});
+
+			$("#register").click(function () {
+                var toRegister = encodeURI("/login/page?isLogin=" + 1); //使用encodeURI编码
+                location.href = toRegister;
+			});
+
+			$('#toSearch').blur(function () {
+			    console.log($('#searchName').val())
+			    if($('#searchName').val()) {
+                    var toSearch = encodeURI("/searchAnswerPage?searchName=" + $('#searchName').val()); //使用encodeURI编码
+                    location.href = toSearch;
+                } else {
+			        alert("搜索框不能为空！");
+                }
+
+            });
+		});
+</script>
+
+</html>
